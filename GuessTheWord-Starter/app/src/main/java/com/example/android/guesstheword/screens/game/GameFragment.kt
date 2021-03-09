@@ -22,13 +22,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
+import timber.log.Timber
 
 /**
  * Fragment where the game is played
  */
 class GameFragment : Fragment() {
+    private lateinit var viewModel: GameViewModel
 
     // The current word
     private var word = ""
@@ -51,6 +54,9 @@ class GameFragment : Fragment() {
                 container,
                 false
         )
+
+        Timber.i("Called ViewModelProvider.get")
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         resetList()
         nextWord()
